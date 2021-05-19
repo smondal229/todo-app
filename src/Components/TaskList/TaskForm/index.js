@@ -205,9 +205,15 @@ const TaskForm = ({
 
         <Box display='flex' mt={2}>
           <Box flexGrow={1}>
-            <IconButton size='small' disabled={loading} onClick={onDeleteTask}>
-              <FontAwesomeIcon icon={faTrashAlt} />
-            </IconButton>
+            <CustomTooltip title='Delete task'>
+              <IconButton
+                size='small'
+                disabled={loading}
+                onClick={onDeleteTask}
+              >
+                <FontAwesomeIcon icon={faTrashAlt} />
+              </IconButton>
+            </CustomTooltip>
           </Box>
           <Button
             variant='text'
