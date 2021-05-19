@@ -17,6 +17,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask, deleteTask, updateTask } from "../../../actions/tasks";
 import { getTimeStops } from "../../../helpers/common";
+import CustomTooltip from "../../common/CustomTooltip";
 
 const TaskForm = ({
   classes,
@@ -86,7 +87,7 @@ const TaskForm = ({
         addTask({
           assigned_user: user.id,
           task_date: moment(date).format("YYYY-MM-DD"),
-          task_time: moment(time, "HH:mm").diff(
+          task_time: moment(time, "h:mm a").diff(
             moment().startOf("day"),
             "seconds"
           ),
