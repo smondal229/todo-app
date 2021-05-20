@@ -6,8 +6,9 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     border: "1px solid #ccc",
     borderRadius: 4,
-    backgroundColor: "#f6f6f6",
-    textTransform: "uppercase"
+    backgroundColor: "#f8f8f8",
+    textTransform: "uppercase",
+    alignItems: "center"
   },
   taskButton: {
     padding: 10
@@ -20,7 +21,8 @@ export const useStyles = makeStyles((theme) => ({
     color: red[500]
   },
   primaryText: {
-    fontWeight: 700
+    fontWeight: 700,
+    maxWidth: 100
   },
   formCancelBtn: {
     textTransform: "capitalize"
@@ -37,5 +39,14 @@ export const useStyles = makeStyles((theme) => ({
     "& > *": {
       width: "fit-content"
     }
+  },
+  cardContainer: {
+    maxWidth: 400,
+    marginTop: 200,
+    marginLeft: 260,
+    marginBottom: 40
+  },
+  inputs: {
+    backgroundColor: "#f8f8f8"
   }
 }));

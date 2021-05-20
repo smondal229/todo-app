@@ -1,8 +1,7 @@
-import { Box } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { getUserId } from "./api/auth";
 import { Login } from "./Components/Login";
-import TaskList from "./Components/TaskList";
+import Layout from "./containers/Layout";
 
 function App() {
   const token = localStorage.getItem("accessToken");
@@ -21,11 +20,7 @@ function App() {
     }
   }, [token]);
 
-  return (
-    <Box m={2}>
-      {isLoggedIn ? <TaskList /> : <Login setLoggedIn={setLoggedIn} />}
-    </Box>
-  );
+  return isLoggedIn ? <Layout /> : <Login setLoggedIn={setLoggedIn} />;
 }
 
 export default App;

@@ -16,6 +16,7 @@ import moment from "moment";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask, deleteTask, updateTask } from "../../../actions/tasks";
+import { assignees } from "../../../constants/assignees";
 import { getTimeStops } from "../../../helpers/common";
 import CustomTooltip from "../../common/CustomTooltip";
 
@@ -27,7 +28,8 @@ const TaskForm = ({
     task_date,
     task_time,
     time_zone,
-    user_id
+    user_id,
+    assigned_user
   },
   setActiveTask
 }) => {
@@ -43,7 +45,7 @@ const TaskForm = ({
   const user = localStorage.getItem("currentUser")
     ? JSON.parse(localStorage.getItem("currentUser"))
     : {};
-  const [assignee, setAssignee] = useState(user_id || "");
+  const [assignee, setAssignee] = useState(assigned_user || "");
 
   const handleChange = (event) => {
     setAssignee(event.target.value);
@@ -125,6 +127,7 @@ const TaskForm = ({
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           disabled={loading}
+          className={classes.inputs}
         />
 
         <Box display='flex' mt={2}>
@@ -144,6 +147,7 @@ const TaskForm = ({
                   </InputAdornment>
                 )
               }}
+              className={classes.inputs}
               disabled={loading}
               value={date}
               onChange={(e) => setDate(e.target.value)}
@@ -170,6 +174,7 @@ const TaskForm = ({
                     <ScheduleIcon />
                   </InputAdornment>
                 }
+                className={classes.inputs}
               >
                 {getTimeStops("00:00", "23:59").map((slot) => (
                   <MenuItem key={slot} value={slot}>
@@ -195,11 +200,16 @@ const TaskForm = ({
               value={assignee}
               onChange={handleChange}
               disabled={loading}
+              className={classes.inputs}
             >
               <MenuItem value=''>
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={user.id}>{user.name}</MenuItem>
+              {assignees.map((assignee) => (
+                <MenuItem key={assignee.user_id} value={assignee.user_id}>
+                  {assignee.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Box>

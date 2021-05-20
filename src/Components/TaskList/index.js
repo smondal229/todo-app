@@ -23,7 +23,7 @@ const TaskList = () => {
   };
 
   return (
-    <Card style={{ maxWidth: 400 }}>
+    <Card className={classes.cardContainer}>
       <Box className={classes.header}>
         <Box flexGrow={1} m={1} display='flex'>
           <Box>Tasks</Box>
