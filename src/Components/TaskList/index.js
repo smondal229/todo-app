@@ -3,6 +3,7 @@ import { AddOutlined } from "@material-ui/icons";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTasks } from "../../actions/tasks";
+import { getAllUsers } from "../../actions/users";
 import CustomTooltip from "../common/CustomTooltip";
 import { useStyles } from "./styles";
 import Task from "./Task";
@@ -16,12 +17,13 @@ const TaskList = () => {
 
   useEffect(() => {
     dispatch(getAllTasks());
+    dispatch(getAllUsers());
   }, [dispatch]);
 
   const onClicktask = (task) => {
     setActiveTask(task);
   };
-
+  console.log("tasks", tasks);
   return (
     <Card className={classes.cardContainer}>
       <Box className={classes.header}>

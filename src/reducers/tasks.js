@@ -18,7 +18,7 @@ export default function tasks(state = INITIAL_STATE, action) {
     case ADD_TODO_SUCCESS:
       return {
         ...state,
-        list: [...state.list, action.payload.results]
+        list: [action.payload.results, ...state.list]
       };
 
     case UPDATE_TODO_SUCCESS:

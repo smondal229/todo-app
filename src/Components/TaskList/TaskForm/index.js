@@ -14,9 +14,8 @@ import DateRangeIcon from "@material-ui/icons/DateRange";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import moment from "moment";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTask, deleteTask, updateTask } from "../../../actions/tasks";
-import { assignees } from "../../../constants/assignees";
 import { getTimeStops } from "../../../helpers/common";
 import CustomTooltip from "../../common/CustomTooltip";
 
@@ -46,6 +45,7 @@ const TaskForm = ({
     ? JSON.parse(localStorage.getItem("currentUser"))
     : {};
   const [assignee, setAssignee] = useState(assigned_user || "");
+  const assignees = useSelector((state) => state.users.assigneeUsers);
 
   const handleChange = (event) => {
     setAssignee(event.target.value);
@@ -114,7 +114,7 @@ const TaskForm = ({
       });
     }
   };
-
+  console.log("assign id", taskId);
   return (
     <form onSubmit={onSave}>
       <Box bgcolor='#ECF6FC' p={2} mt={-1}>
@@ -206,7 +206,7 @@ const TaskForm = ({
                 <em>None</em>
               </MenuItem>
               {assignees.map((assignee) => (
-                <MenuItem key={assignee.user_id} value={assignee.user_id}>
+                <MenuItem key={assignee.id} value={assignee.id}>
                   {assignee.name}
                 </MenuItem>
               ))}
@@ -216,15 +216,17 @@ const TaskForm = ({
 
         <Box display='flex' mt={2}>
           <Box flexGrow={1}>
-            <CustomTooltip title='Delete task'>
-              <IconButton
-                size='small'
-                disabled={loading}
-                onClick={onDeleteTask}
-              >
-                <FontAwesomeIcon icon={faTrashAlt} />
-              </IconButton>
-            </CustomTooltip>
+            {taskId && (
+              <CustomTooltip title='Delete task'>
+                <IconButton
+                  size='small'
+                  disabled={loading}
+                  onClick={onDeleteTask}
+                >
+                  <FontAwesomeIcon icon={faTrashAlt} />
+                </IconButton>
+              </CustomTooltip>
+            )}
           </Box>
           <Button
             variant='text'
